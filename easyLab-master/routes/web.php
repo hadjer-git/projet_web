@@ -17,9 +17,33 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-Route::get('/', function () {
+
+Route::get('/Acceuil/login', function () {
     return view('auth/login');
 });
+Route::get('/', function () {
+    return view('Acceuil');
+});
+Route::get('/Acceuil/contact', function () {
+    return view('Contacts');
+});
+Route::get('/Acceuil/Equipe/GL', function () {
+    return view('equipeGL');
+});
+Route::get('/Acceuil/Presentation', function () {
+    return view('presentation');
+});
+Route::get('/Acceuil/Equipe/GL/Membre', function () {
+    return view('Profile Membre');
+});
+Route::get('/Acceuil/Equipe/GL/Partenaire', function () {
+    return view('paterne');
+});
+Route::get('/Acceuil/Equipe/GL/Projet', function () {
+    return view('projet');
+});
+
+
 
 
 
