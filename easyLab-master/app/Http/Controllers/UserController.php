@@ -54,6 +54,11 @@ class UserController extends Controller
             
         ]);;
     } 
+    public function ShowDetails($id)
+    {
+        
+       return view('Profile Membre',['user'=>$id]);
+    } 
 
     public function create()
     {

@@ -63,6 +63,17 @@ class EquipeController extends Controller
         ]);
     } 
 
+
+    public function ShowDetails($achronymes)
+    {
+       // $labo = Parametre::find('1');
+        $equipe = Equipe::find($achronymes);
+       return view('equipeGL',['equipe'=>$achronymes]);/*->with([
+           'equipe' => $equipe,
+           'labo'=>$labo,
+        ]);*/
+    } 
+
     public function store(equipeRequest $request)
     {
         $labo = Parametre::find('1');
