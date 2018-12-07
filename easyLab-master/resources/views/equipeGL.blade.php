@@ -1,12 +1,32 @@
 @extends('layouts.FrontOffice')
 
 @section('content')
+@extends('layouts.Menu')
+
+@section('content')
 <!DOCTYPE html>
+ <?php
+    try
+{// On se connecte à MySQL
+
+        $bdd = new PDO('mysql:host=localhost;dbname=lrit;charset=utf8', 'root', '');
+
+        }
+        catch(Exception $e)
+        {
+                die('Erreur : ' . $e->getMessage());
+        } 
+        
+        $req=" SELECT * from equipes where achronymes='$equipe'" ;
+$reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
+$reponse->execute();
+        $row=$reponse->fetch();
+?>
 <!-- saved from url=(0063)https://livedemo00.template-help.com/wt_prod-14585/history.html -->
 <html class="wide wow-animation scrollTo" lang="en">
   <head>
     <!-- Site Title-->
-    <title>Equipes</title>
+    <title><?php echo $row['intitule']  ?></title>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -25,113 +45,10 @@
     <![endif]-->
   </head>
   <body>
+   
     <!-- Page-->
     <div class="page text-center">
-      <!-- Page Header-->
-      <header class="page-head">
-        <!-- RD Navbar Transparent-->
-         <div class="rd-navbar-wrap">
-          <nav class="rd-navbar rd-navbar-center" data-md-device-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-stick-up-offset="230" data-lg-auto-height="true" data-auto-height="false" data-md-layout="rd-navbar-static" data-lg-layout="rd-navbar-static" data-lg-stick-up="true">
-            <div class="rd-navbar-inner">
-              <!-- RD Navbar Panel-->
-              <div class="rd-navbar-panel">
-                <!-- RD Navbar Toggle-->
-                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar, .rd-navbar-nav-wrap"><span></span></button>
-                <h4 class="panel-title veil-md">Pages</h4>
-                <!-- RD Navbar Right Side Toggle-->
-                <button class="rd-navbar-top-panel-toggle veil-md" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span></button>
-                <div class="rd-navbar-top-panel">
-                  <div class="shell">
-                    <div class="range range-md-center range-md-middle range-lg-around">
-                      <div class="cell-md-3">
-                        <div class="unit unit-horizontal unit-top unit-spacing-xs">
-                          <div class="unit-left"><span class="icon mdi mdi-phone text-middle"></span></div>
-                          <div class="unit-body"><a class="reveal-block" href="tel:#">1-800-1234-567,</a><a href="tel:#">1-800-6547-321</a></div>
-                        </div>
-                      </div>
-                      <div class="cell-md-3 offset-top-0">
-                        <!--Navbar Brand-->
-                        <div class="rd-navbar-brand"><a class="reveal-block" href="index.html">
-                            <div class="unit unit-xs-middle unit-spacing-xxs">
-                              <div class="unit-left"><img width='170' height='172' src="{{asset('labo/front_office/img/1525711039.png')}}" alt=''/>
-                              </div>
-                              <div class="unit-body text-center">
-                                <div class="rd-navbar-brand-title">LRIT</div>
-                                <div class="rd-navbar-brand-slogan text-light">Tlemcen</div>
-                              </div>
-                            </div></a></div>
-                      </div>
-                      <div class="cell-md-3 offset-top-10 offset-md-top-0">
-                        <div class="inset-md-left-50">
-                          <div class="unit unit-horizontal unit-top unit-spacing-xs text-left">
-                            <div class="unit-left"><span class="icon mdi mdi-map-marker text-middle"></span></div>
-                            <div class="unit-body"><a href="#">2130 Fulton Street San Diego, CA 94117-1080 USA</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="rd-navbar-menu-wrap clearfix">
-                <div class="rd-navbar-nav-wrap">
-                  <div class="rd-navbar-mobile-scroll">
-                    <div class="rd-navbar-mobile-header-wrap">
-                      <!--Navbar Brand Mobile-->
-                      <div class="rd-navbar-mobile-brand"><a href="Home.html"><img width="136" height="138" src="{{asset('labo/front_office/img/dspace-logo-only.png')}}" alt=""></a></div>
-                    </div>
-                    <!-- RD Navbar Nav-->
-                    <ul class="rd-navbar-nav">
-                     <li ><a href="/">Accueil</a>
-                      </li>
-                      <li><a href="/Acceuil/Presentation">Presentation</a>
-                      </li>
-                      <li class="rd-navbar--has-dropdown rd-navbar-submenu" class="active"><a>Equipes</a>
-                        <ul class="rd-navbar-dropdown" >
-                          <li><a href="/Acceuil/Equipe/GL">SIDK</a>
-                          </li>
-                          <li><a href="#">RSDS</a>
-                          </li>
-                          <li><a href="#">ILS</a>
-                          </li>
-                          <li><a href="#">ESC</a>
-                          </li>
-                        </ul>
-                      <span class="rd-navbar-submenu-toggle"></span></li>
-                     
-                      <li><a href="/Acceuil/contact">Contacts</a>
-                      </li>
-                      
-                    </ul>
-                   <!--RD Navbar Mobile Search-->
-                    <div class="rd-navbar-search-wrap" id="rd-navbar-search-wrap">
-                      <form class="rd-navbar-search-form search-form-icon-right rd-search" action="search-results.html" method="GET">
-                        <div class="form-group">
-                          <label class="form-label" for="rd-navbar-mobile-search-form-input">Search...</label>
-                          <input class="rd-navbar-search-form-input form-control form-control-gray-lightest" id="rd-navbar-mobile-search-form-input" type="text" name="s" autocomplete="off"/>
-                        </div>
-                        <button class="icon fa-search rd-navbar-search-button" type="submit"></button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!--RD Navbar Search-->
-                <div class="rd-navbar-search"><a class="rd-navbar-search-toggle" data-rd-navbar-toggle=".rd-navbar-search" href="#"><span class="icon fa-shopping-cart"></span></a>
-                  <form class="rd-navbar-search-form search-form-icon-right rd-search" action="search-results.html" data-search-live="rd-search-results-live" method="GET">
-                    <div class="form-group">
-                      <label class="form-label" for="rd-navbar-search-form-input">Search</label>
-                      <input class="rd-navbar-search-form-input form-control form-control-gray-lightest" id="rd-navbar-search-form-input" type="text" name="s" autocomplete="off"/>
-                      <div class="rd-search-results-live" id="rd-search-results-live"></div>
-                    </div>
-                  </form>
-                </div>
-                <!--RD Navbar shop-->
-               
-              </div>
-            </div>
-          </nav>
-        </div>
-      </header>
+  
       <!-- Classic Breadcrumbs-->
       <section class="breadcrumb-classic context-dark">
          <div class="swiper-container swiper-slider swiper-slider-3 swiper-container-horizontal swiper-container-true" data-height="2vh" data-loop="false" data-dragable="false" data-min-height="280px" data-slide-effect="true" style="height: 667px;">
@@ -142,12 +59,14 @@
                     <div class="range range-xs-center range-condensed">
                       <div class="cell-md-7 text-center cell-xs-10">
                        <div class="shell section-30 section-sm-top-70 section-sm-bottom-60">
-          <h1 class="veil reveal-sm-block">Système d'information et connaissance</h1>
+          
+          <h1 class="veil reveal-sm-block"><?php echo $row['intitule']  ?></h1>
+
           <div class="offset-sm-top-35">
             <ul class="list-inline list-inline-lg list-inline-dashed p">
               <li><a href="Home.html">Accueil</a></li>
               <li><a href="equipeGL.html">equipe</a></li>
-              <li>SIC</li>
+              <li><?php echo $row['achronymes']  ?></li>
             </ul>
           </div>
         </div>
@@ -168,19 +87,19 @@
             <div class="responsive-tabs responsive-tabs-classic vertical" data-type="vertical">
               <ul class="resp-tabs-list tabs-1 text-center tabs-lg-collapsed" data-group="tabs-lg-collapsed">
                 <li>Presentation</li>
-				<li>Membres</li>
+        <li>Membres</li>
                 <li>Projets</li>
-				<li>Publication</li>
-				<li>Partenaires</li>
+        <li>Publication</li>
+        <li>Partenaires</li>
                 
               </ul>
               <div class="resp-tabs-container text-sm-left tabs-lg-collapsed" data-group="tabs-lg-collapsed">
                 
-				<div>
+        <div>
                   <div class="inset-lg-left-60">
-                    <h2 class="text-bold veil reveal-lg-block">Système d'information et connaissance</h2>
+                    <h2 class="text-bold veil reveal-lg-block"><?php echo $row['intitule']  ?></h2>
                     <div class="hr divider bg-madison hr-sm-left-0 veil reveal-lg-block"></div>
-					
+          
                     
                     <div class="offset-top-30">
                      <img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/images/gl.jpg')}}" width="770" height="480" alt=""></div>
@@ -195,7 +114,7 @@
               <div class="offset-top-60">
                 <div class="rd-search-results"></div>
               </div>
-				             <h3 class="text-bold veil reveal-lg-block">Descriiption</h3>
+                     <h3 class="text-bold veil reveal-lg-block">Descriiption</h3>
                       <p>Dans les nouveaux contextes de traitement de l’information les données numériques sont devenues souvent:</p>
                       <p>
                         <ul>
@@ -221,21 +140,35 @@
                       </p>
                       <br>
                       <br>
+                     
                      <div align="center" class="col-sm-3 col-lg-1-1"> 
-                      <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="500" height="100" alt="">
+                      <div class="team-member"> <?php  
+                      $req="SELECT name,prenom,grade,photo FROM equipes,users where equipes.chef_id=users.id and equipes.achronymes='$equipe'" ;
+$reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
+$reponse->execute();
+        $row=$reponse->fetch();
+       $img_src= $row['photo'];
+     //  echo "<img class='img-responsive reveal-inline-block' src='{{asset('labo/front_office/img/Membre.jpg')}}' width='500' height='100' alt=''>";
+
+                    ?><!--<img class='img-responsive reveal-inline-block' src=<?php echo"'{{asset('".$img_src."')}}'" ?> width='500' height='100' alt=''>-->
+                    <img class='img-responsive reveal-inline-block' src="<?php echo (asset($row['photo'])); ?>" width='500' height='100' alt=''>
                 <div class="team-member-body">
                   <div>
-                    <h4 class="text-bold team-member-title"><a href="/Acceuil/Equipe/GL/Membre">Membre1</a></h4>
+                    
+                    <h4 class="text-bold team-member-title"><a href="/Acceuil/Equipe/GL/Membre">
+                      <?php echo $row['name'];
+                      echo ' '.$row['prenom'];
+                        ?></a></h4>
                   </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="/Acceuil/Equipe/GL/Membre">Profile</a>
+                  <p class="offset-top-0"><?php echo $row['grade'];?></p><a class="btn btn-primary" href="/Acceuil/Equipe/GL/Membre">Profile</a>
                 </div>
-              </div><br><h3 class="text-bold veil reveal-lg-block"><a href="/Acceuil/Equipe/GL/Membre">Le Chef De L'équipe</a></h3></div>
+              </div><br><h3 class="text-bold veil reveal-lg-block"><a href="/Acceuil/Equipe/GL/Membre">Chef De L'Equipe</a></h3></div>
                     </div>
-				
-		             
-				</div>
-				</div>
-				
+        
+                 
+        </div>
+        </div>
+        
                   <div>
                   <div class="inset-lg-left-60">
                     <h2 class="text-bold veil reveal-lg-block">Membres</h2>
@@ -253,78 +186,36 @@
           
             
             <div class="row row-lg-condensed">
-              <!--Membre1-->
-            <div class="col-sm-4 col-lg-1-4">
-              <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="384" height="500" alt="">
-                <div class="team-member-body">
-                  <div>
-                    <h4 class="text-bold team-member-title"><a href="/Acceuil/Equipe/GL/Membre">Membre4</a></h4>
-                  </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="/Acceuil/Equipe/GL/Membre">Profile</a>
-                </div>
-              </div>
-            </div>
-            <!--Fin-->
-            <!--Membre1-->
+              <!--Membre1--><?php  
+                      $req="SELECT users.id,name,prenom,grade,photo FROM equipes,users where equipes.id=users.equipe_id and equipes.achronymes='$equipe'" ;
+$reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
+$reponse->execute();
+        $row=$reponse->fetch();
+        while ($donnees = $reponse->fetch()) // On affiche chaque entrée une à une
+{
+?>
             <div class="col-sm-3 col-lg-1-4">
-              <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="384" height="500" alt="">
+              <div class="team-member"><img class="img-responsive reveal-inline-block" src="<?php echo (asset($donnees['photo'])); ?>" width="384" height="500" alt="">
                 <div class="team-member-body">
                   <div>
-                    <h4 class="text-bold team-member-title"><a href="https://livedemo00.template-help.com/wt_prod-14585/team-member-profile.html">Membre4</a></h4>
+                    <h4 class="text-bold team-member-title"><a href="/membre/<?php echo $donnees['id'];  ?>">
+                      <?php 
+                      echo $donnees['name']; 
+                      echo "  ".$donnees['prenom'];
+                      ?></a></h4>
                   </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="Profile Membre.html">Profile</a>
+                  <p class="offset-top-0"><?php 
+                      echo $donnees['grade']; 
+                      ?></p><a class="btn btn-primary" href="/membre/<?php echo $donnees['id'];  ?>">Profile</a>
                 </div>
               </div>
             </div>
             <!--Fin-->
-             <!--Membre1-->
-            <div class="col-sm-3 col-lg-1-4">
-              <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="384" height="500" alt="">
-                <div class="team-member-body">
-                  <div>
-                    <h4 class="text-bold team-member-title"><a href="https://livedemo00.template-help.com/wt_prod-14585/team-member-profile.html">Membre4</a></h4>
-                  </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="Profile Membre.html">Profile</a>
-                </div>
-              </div>
-            </div>
-            <!--Fin-->
-            <!--Membre1-->
-            <div class="col-sm-3 col-lg-1-4">
-              <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="384" height="500" alt="">
-                <div class="team-member-body">
-                  <div>
-                    <h4 class="text-bold team-member-title"><a href="https://livedemo00.template-help.com/wt_prod-14585/team-member-profile.html">Membre4</a></h4>
-                  </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="Profile Membre.html">Profile</a>
-                </div>
-              </div>
-            </div>
-            <!--Fin-->
-            <!--Membre1-->
-            <div class="col-sm-3 col-lg-1-4">
-              <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="384" height="500" alt="">
-                <div class="team-member-body">
-                  <div>
-                    <h4 class="text-bold team-member-title"><a href="https://livedemo00.template-help.com/wt_prod-14585/team-member-profile.html">Membre4</a></h4>
-                  </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="Profile Membre.html">Profile</a>
-                </div>
-              </div>
-            </div>
-            <!--Fin-->
-            <!--Membre1-->
-            <div class="col-sm-3 col-lg-1-4">
-              <div class="team-member"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/img/Membre.jpg')}}" width="384" height="500" alt="">
-                <div class="team-member-body">
-                  <div>
-                    <h4 class="text-bold team-member-title"><a href="https://livedemo00.template-help.com/wt_prod-14585/team-member-profile.html">Membre4</a></h4>
-                  </div>
-                  <p class="offset-top-0">specialité</p><a class="btn btn-primary" href="Profile Membre.html">Profile</a>
-                </div>
-              </div>
-            </div>
-            <!--Fin-->
+            <?php
+}
+$reponse->closeCursor(); // Termine le traitement de la requête
+?>
+           
          </div>
 
       </div>
@@ -474,13 +365,13 @@
                 </div>
                 
           </div>
-		  
-		  
-		  <div class="interieur" id="contenus_page">
-		<div id="titre"><h3>Les laboratoires partenaires</h3>
-		</br>
-		</br>
-		</div>
+      
+      
+      <div class="interieur" id="contenus_page">
+    <div id="titre"><h3>Les laboratoires partenaires</h3>
+    </br>
+    </br>
+    </div>
 
 
  
@@ -489,72 +380,72 @@
 
 
          <div class="ligne_1"><div class="colonne_1">
-		 <div class="colonne_deco"><div class="style_1">
-		 
-		
-								<h2 class="paragraphe__titre--1">G-SCOP</h2><div class="paragraphe__contenu--1 toolbox">
-								<a href="paterne.html" ><strong>LA&nbsp;CONCEPTION, L'OPTIMISATION ET&nbsp;LA&nbsp;PRODUCTION</strong></a><div style="text-align: center;"><a  href="/Acceuil/Equipe/GL/Partenaire" ><img title="" alt="" style="width:320px;height:140px;margin : 10px 0px;" src="http://genie-industriel.grenoble-inp.fr/medias/photo/logo-g-scop_1393325206311-jpg" /></a></div><div style="text-align: justify;">G-SCOP  tente de r&eacute;pondre aux d&eacute;fis scientifiques pos&eacute;s par les mutations du  monde industriel en cours et &agrave; venir. Le p&eacute;rim&egrave;tre du laboratoire va de  la conception des produits &agrave; la gestion des syst&egrave;mes de production en  s'appuyant sur de fortes comp&eacute;tences en optimisation.</div>
-							</div><!-- .paragraphe__contenu--1 .toolbox -->
-						</div><!-- paragraphe--1 --></div><!-- colonne_deco -->
-			</div><!-- .colonne_1 -->
-			
-			
-			
-			<div class="colonne_2">
-				<div class="colonne_deco"><div class="style_1">
-								<h2 class="paragraphe__titre--1">GAEL</h2><div class="paragraphe__contenu--1 toolbox">
-								<a _linktype="interne" href="/Acceuil/Equipe/GL/Partenaire" class="lien_interne"> <strong>LABORATOIRE&nbsp;D'&Eacute;CONOMIE APPLIQU&Eacute;E DE GRENOBLE </strong></a> &nbsp;<div style="text-align: center;"><a _linktype="interne" href="par_1.html" class="lien_interne"><img src="http://genie-industriel.grenoble-inp.fr/medias/photo/logo-gael-couleur-fr-sans-texte_1498221820842-jpg" alt="" title="" style="width:205px;height:140px;" /></a></div><div style="text-align: justify;"><br />GAEL est un laboratoire de l'INRA, de l'UGA et de Grenoble INP. Ce laboratoire conduit des recherches finalis&eacute;es en lien avec l'agriculture, la consommation et le d&eacute;veloppement durable.</div>
-							</div><!-- .paragraphe__contenu--1 .toolbox -->
-						</div><!-- paragraphe--1 --></div><!-- colonne_deco -->
-			</div><!-- .colonne_2 --></div><!-- .ligne_1 -->
-			
-			<div class="ligne_2"><div class="colonne_1">
-				<div class="colonne_deco"><div class="style_1">
-								<h2 class="paragraphe__titre--1">PACTE</h2><div class="paragraphe__contenu--1 toolbox">
-								<a _linktype="interne" href="/Acceuil/Equipe/GL/Partenaire" class="lien_interne"><strong>POLITIQUE&nbsp;PUBLIQUES, ACTION POLITIQUE, TERRITOIRES</strong></a><div style="text-align: center;"><a _linktype="interne" href="http://genie-industriel.grenoble-inp.fr/recherche/pacte-583586.kjsp?RH=GI_FR-LABP" class="lien_interne"><img title="" alt="" style="width:320px;height:140px;margin : 10px 0px;" src="http://genie-industriel.grenoble-inp.fr/medias/photo/gi-pacte-logo_1393175279390-jpg" /></a></div><br /><div style="text-align: justify;">PACTE  est une unit&eacute; mixte de recherche du CNRS et de l’UGA qui rassemble les politistes, les g&eacute;ographes et les  urbanistes, ainsi que des sociologues du site grenoblois. Elle accueille  aussi des &eacute;conomistes, des juristes et des historiens.</div>
-							</div><!-- .paragraphe__contenu--1 .toolbox -->
-						</div><!-- paragraphe--1 --></div><!-- colonne_deco -->
-			</div><!-- .colonne_1 -->
-			
-		
-			<div class="colonne_2">
-				<div class="colonne_deco"><div class="style_1">
-								<h2 class="paragraphe__titre--1">CERAG</h2><div class="paragraphe__contenu--1 toolbox">
-								<a href="/Acceuil/Equipe/GL/Partenaire" _linktype="interne" class="lien_interne"><strong>CENTRE D'ETUDES ET DE RECHERCHE APPLIQUEES A LA GESTION</strong></a><div style="text-align: center;"><a href="http://genie-industriel.grenoble-inp.fr/les-laboratoires-partenaires/cerag-597248.kjsp?RH=GI_FR-LABP" _linktype="interne" class="lien_interne"><img title="" alt="" style="width:320px;height:140px;margin : 10px 0px;" src="http://genie-industriel.grenoble-inp.fr/medias/photo/logo-cerag_1399887344169-jpg" /></a></div><br />Le CERAG est une Unit&eacute; Mixte de Recherche (UMR 5820) rattach&eacute;e &agrave; l’UGA et au CNRS. Le laboratoire est d&eacute;di&eacute; &agrave; la recherche en sciences de gestion.<br />
-							</div><!-- .paragraphe__contenu--1 .toolbox -->
-						</div><!-- paragraphe--1 --></div><!-- colonne_deco -->
-			</div><!-- .colonne_2 --></div><!-- .ligne_2 -->
-			
-			
-			<div class="ligne_3"><div class="colonne_1">
-				<div class="colonne_deco"><div class="style_1">
-								<h2 class="paragraphe__titre--1">CREG</h2><div class="paragraphe__contenu--1 toolbox">
-								<strong>CENTRE&nbsp;DE&nbsp;RECHERCHE&nbsp;EN&nbsp;&Eacute;CONOMIE DE&nbsp;GRENOBLE</strong><div style="text-align: center;"><img src="http://genie-industriel.grenoble-inp.fr/medias/photo/gi-creg-logo_1393175233842-jpg" style="width:320px;height:140px;margin : 10px 0px;" alt="" title="" /></div>Ce  laboratoire rattach&eacute; &agrave; l'UGA et partenaire de Grenoble INP &eacute;tudie les probl&egrave;mes pos&eacute;s par les &eacute;volutions de la  mondialisation et ses interactions avec les modes de d&eacute;veloppement  &eacute;conomique, au niveau des entreprises et des territoires. <br /><div style="text-align: justify;"><br />&nbsp;</div><div style="text-align: center;">&nbsp;</div>
-							</div><!-- .paragraphe__contenu--1 .toolbox -->
-						</div><!-- paragraphe--1 --></div><!-- colonne_deco -->
-			</div><!-- .colonne_1 --></div><!-- .ligne_3 -->
+     <div class="colonne_deco"><div class="style_1">
+     
+    
+                <h2 class="paragraphe__titre--1">G-SCOP</h2><div class="paragraphe__contenu--1 toolbox">
+                <a href="paterne.html" ><strong>LA&nbsp;CONCEPTION, L'OPTIMISATION ET&nbsp;LA&nbsp;PRODUCTION</strong></a><div style="text-align: center;"><a  href="/Acceuil/Equipe/GL/Partenaire" ><img title="" alt="" style="width:320px;height:140px;margin : 10px 0px;" src="http://genie-industriel.grenoble-inp.fr/medias/photo/logo-g-scop_1393325206311-jpg" /></a></div><div style="text-align: justify;">G-SCOP  tente de r&eacute;pondre aux d&eacute;fis scientifiques pos&eacute;s par les mutations du  monde industriel en cours et &agrave; venir. Le p&eacute;rim&egrave;tre du laboratoire va de  la conception des produits &agrave; la gestion des syst&egrave;mes de production en  s'appuyant sur de fortes comp&eacute;tences en optimisation.</div>
+              </div><!-- .paragraphe__contenu--1 .toolbox -->
+            </div><!-- paragraphe--1 --></div><!-- colonne_deco -->
+      </div><!-- .colonne_1 -->
+      
+      
+      
+      <div class="colonne_2">
+        <div class="colonne_deco"><div class="style_1">
+                <h2 class="paragraphe__titre--1">GAEL</h2><div class="paragraphe__contenu--1 toolbox">
+                <a _linktype="interne" href="/Acceuil/Equipe/GL/Partenaire" class="lien_interne"> <strong>LABORATOIRE&nbsp;D'&Eacute;CONOMIE APPLIQU&Eacute;E DE GRENOBLE </strong></a> &nbsp;<div style="text-align: center;"><a _linktype="interne" href="par_1.html" class="lien_interne"><img src="http://genie-industriel.grenoble-inp.fr/medias/photo/logo-gael-couleur-fr-sans-texte_1498221820842-jpg" alt="" title="" style="width:205px;height:140px;" /></a></div><div style="text-align: justify;"><br />GAEL est un laboratoire de l'INRA, de l'UGA et de Grenoble INP. Ce laboratoire conduit des recherches finalis&eacute;es en lien avec l'agriculture, la consommation et le d&eacute;veloppement durable.</div>
+              </div><!-- .paragraphe__contenu--1 .toolbox -->
+            </div><!-- paragraphe--1 --></div><!-- colonne_deco -->
+      </div><!-- .colonne_2 --></div><!-- .ligne_1 -->
+      
+      <div class="ligne_2"><div class="colonne_1">
+        <div class="colonne_deco"><div class="style_1">
+                <h2 class="paragraphe__titre--1">PACTE</h2><div class="paragraphe__contenu--1 toolbox">
+                <a _linktype="interne" href="/Acceuil/Equipe/GL/Partenaire" class="lien_interne"><strong>POLITIQUE&nbsp;PUBLIQUES, ACTION POLITIQUE, TERRITOIRES</strong></a><div style="text-align: center;"><a _linktype="interne" href="http://genie-industriel.grenoble-inp.fr/recherche/pacte-583586.kjsp?RH=GI_FR-LABP" class="lien_interne"><img title="" alt="" style="width:320px;height:140px;margin : 10px 0px;" src="http://genie-industriel.grenoble-inp.fr/medias/photo/gi-pacte-logo_1393175279390-jpg" /></a></div><br /><div style="text-align: justify;">PACTE  est une unit&eacute; mixte de recherche du CNRS et de l’UGA qui rassemble les politistes, les g&eacute;ographes et les  urbanistes, ainsi que des sociologues du site grenoblois. Elle accueille  aussi des &eacute;conomistes, des juristes et des historiens.</div>
+              </div><!-- .paragraphe__contenu--1 .toolbox -->
+            </div><!-- paragraphe--1 --></div><!-- colonne_deco -->
+      </div><!-- .colonne_1 -->
+      
+    
+      <div class="colonne_2">
+        <div class="colonne_deco"><div class="style_1">
+                <h2 class="paragraphe__titre--1">CERAG</h2><div class="paragraphe__contenu--1 toolbox">
+                <a href="/Acceuil/Equipe/GL/Partenaire" _linktype="interne" class="lien_interne"><strong>CENTRE D'ETUDES ET DE RECHERCHE APPLIQUEES A LA GESTION</strong></a><div style="text-align: center;"><a href="http://genie-industriel.grenoble-inp.fr/les-laboratoires-partenaires/cerag-597248.kjsp?RH=GI_FR-LABP" _linktype="interne" class="lien_interne"><img title="" alt="" style="width:320px;height:140px;margin : 10px 0px;" src="http://genie-industriel.grenoble-inp.fr/medias/photo/logo-cerag_1399887344169-jpg" /></a></div><br />Le CERAG est une Unit&eacute; Mixte de Recherche (UMR 5820) rattach&eacute;e &agrave; l’UGA et au CNRS. Le laboratoire est d&eacute;di&eacute; &agrave; la recherche en sciences de gestion.<br />
+              </div><!-- .paragraphe__contenu--1 .toolbox -->
+            </div><!-- paragraphe--1 --></div><!-- colonne_deco -->
+      </div><!-- .colonne_2 --></div><!-- .ligne_2 -->
+      
+      
+      <div class="ligne_3"><div class="colonne_1">
+        <div class="colonne_deco"><div class="style_1">
+                <h2 class="paragraphe__titre--1">CREG</h2><div class="paragraphe__contenu--1 toolbox">
+                <strong>CENTRE&nbsp;DE&nbsp;RECHERCHE&nbsp;EN&nbsp;&Eacute;CONOMIE DE&nbsp;GRENOBLE</strong><div style="text-align: center;"><img src="http://genie-industriel.grenoble-inp.fr/medias/photo/gi-creg-logo_1393175233842-jpg" style="width:320px;height:140px;margin : 10px 0px;" alt="" title="" /></div>Ce  laboratoire rattach&eacute; &agrave; l'UGA et partenaire de Grenoble INP &eacute;tudie les probl&egrave;mes pos&eacute;s par les &eacute;volutions de la  mondialisation et ses interactions avec les modes de d&eacute;veloppement  &eacute;conomique, au niveau des entreprises et des territoires. <br /><div style="text-align: justify;"><br />&nbsp;</div><div style="text-align: center;">&nbsp;</div>
+              </div><!-- .paragraphe__contenu--1 .toolbox -->
+            </div><!-- paragraphe--1 --></div><!-- colonne_deco -->
+      </div><!-- .colonne_1 --></div><!-- .ligne_3 -->
 
-			</div>
+      </div>
 
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
         </section>
       </main>
       <!-- Page Footer-->
@@ -679,3 +570,4 @@
   </body><!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FT69');</script><!-- End Google Tag Manager -->
 </html>
  @endsection
+  @endsection
