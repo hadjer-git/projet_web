@@ -27,7 +27,7 @@
     <!-- Page-->
     <div class="page text-center">
       <!-- Page Header-->
-      <header class="page-head" style="position:absolute; left:0; right:0;top:0;">
+       <header class="page-head" style="position:absolute; left:0; right:0;top:0;">
         <!-- RD Navbar Transparent-->
         <div class="rd-navbar-wrap" style="height: 95px;">
           <nav class="rd-navbar rd-navbar-transparent rd-navbar-static" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-static" data-stick-up-offset="40" data-lg-auto-height="true" data-auto-height="false" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-stick-up="true" data-md-focus-on-hover="false">
@@ -57,22 +57,36 @@
                       <!--Navbar Brand Mobile-->
                       <div class="rd-navbar-mobile-brand"><a href="Home.html"><img width="136" height="138" src="{{asset('labo/front_office/img/1525711039.png')}}" alt=""></a></div>
                     </div>
-                    <!-- RD Navbar Nav-->
+                <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="active"><a href="/">Accueil</a>
+                     <li ><a href="/">Accueil</a>
                       </li>
                       <li><a href="/Acceuil/Presentation">Presentation</a>
                       </li>
-                      <li class="rd-navbar--has-dropdown rd-navbar-submenu"><a>Equipes</a>
+                      <li class="rd-navbar--has-dropdown rd-navbar-submenu" class="active"><a>Equipes</a>
                         <ul class="rd-navbar-dropdown" >
-                          <li><a href="/Acceuil/Equipe/GL">SIDK</a>
+                          <?php
+
+try
+{// On se connecte à MySQL
+$bdd = new PDO('mysql:host=localhost;dbname=lrit;charset=utf8', 'root', '');
+}
+catch(Exception $e)
+{// En cas d'erreur, on affiche un message et on arrête tout
+die('Erreur : '.$e->getMessage());
+} // Si tout va bien, on peut continuer
+$reponse = $bdd->query('SELECT * FROM equipes'); // On récupère tout le contenu de la table 
+while ($donnees = $reponse->fetch()) // On affiche chaque entrée une à une
+{
+?>
+
+                          <li><a href="/Acceuil/Equipe/<?php echo $donnees['achronymes']; ?>"><?php echo $donnees['achronymes']; ?></a>
                           </li>
-                          <li><a href="#">RSDS</a>
-                          </li>
-                          <li><a href="#">ILS</a>
-                          </li>
-                          <li><a href="#">ESC</a>
-                          </li>
+                          <?php
+}
+$reponse->closeCursor(); // Termine le traitement de la requête
+?>
+                          
                         </ul>
                       <span class="rd-navbar-submenu-toggle"></span></li>
                      <li><a href="/Acceuil/login">login</a>
@@ -110,6 +124,8 @@
           </nav>
         </div>
       </header>
+
+
       <!-- Page Content-->
       <main class="page-content">
         <section>
