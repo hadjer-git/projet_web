@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-
 Route::get('/Acceuil/login', function () {
     return view('auth/login');
 });
@@ -27,24 +26,21 @@ Route::get('/', function () {
 Route::get('/Acceuil/contact', function () {
     return view('Contacts');
 });
-Route::get('/Acceuil/Equipe/GL', function () {
+Route::get('/Acceuil/Equipe/GL/{achronymes}', function () {
     return view('equipeGL');
 });
 Route::get('/Acceuil/Presentation', function () {
     return view('presentation');
 });
-Route::get('/Acceuil/Equipe/GL/Membre', function () {
+Route::get('/Acceuil/Membre', function () {
     return view('Profile Membre');
 });
-Route::get('/Acceuil/Equipe/GL/Partenaire', function () {
+Route::get('/Acceuil/Partenaire', function () {
     return view('paterne');
 });
-Route::get('/Acceuil/Equipe/GL/Projet', function () {
+Route::get('/Acceuil/Projet', function () {
     return view('projet');
 });
-
-
-
 
 
 Route::get('dashboard','dashController@index');
@@ -71,6 +67,7 @@ Route::get('membres','UserController@index');
 Route::get('membres/create','UserController@create');
 Route::post('membres','UserController@store');
 Route::get('membres/{id}/details','UserController@details');
+Route::get('/membre/{id}','UserController@ShowDetails');
 Route::get('trombinoscope','UserController@trombi');
 Route::get('membres/{id}/edit','UserController@edit');
 Route::put('membres/{id}','UserController@update');
@@ -86,6 +83,10 @@ Route::get('equipes/{id}/details','EquipeController@details');
 Route::put('equipes/{id}','EquipeController@update');
 Route::delete('equipes/{id}','EquipeController@destroy');
 
+Route::get('/Acceuil/Equipe/{achronymes}','EquipeController@ShowDetails');
+Route::get('/presentation', function () {
+    return view('presentation');
+});
 Route::get('projets','ProjetController@index');
 Route::get('projets/create','ProjetController@create');
 Route::post('projets','ProjetController@store');
