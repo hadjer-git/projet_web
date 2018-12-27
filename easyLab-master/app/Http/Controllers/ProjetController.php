@@ -41,6 +41,7 @@ class ProjetController extends Controller
             'labo'=>$labo,
         ]);;
     } 
+    
 
     //affichage de formulaire de creation d'articles
 	 public function create()

@@ -61,6 +61,8 @@
                     <ul class="rd-navbar-nav">
                      <li ><a href="/">Accueil</a>
                       </li>
+                        <li ><a href="/actualité">Actualité</a>
+                      </li>
                       <li><a href="/Acceuil/Presentation">Presentation</a>
                       </li>
                       <li class="rd-navbar--has-dropdown rd-navbar-submenu" class="active"><a>Equipes</a>
@@ -80,7 +82,7 @@ while ($donnees = $reponse->fetch()) // On affiche chaque entrée une à une
 {
 ?>
 
-                          <li><a href="/Acceuil/Equipe/<?php echo $donnees['achronymes']; ?>"><?php echo $donnees['achronymes']; ?></a>
+                          <li><a href="/Acceuil/Equipe/<?php echo $donnees['id']; ?>"><?php echo $donnees['achronymes']; ?></a>
                           </li>
                           <?php
 }
@@ -163,7 +165,7 @@ $reponse->closeCursor(); // Termine le traitement de la requête
                           <h5 class="text-regular font-default">At Modern University, you can succeed in lots of research areas and invest in your education as well as gain skills that will help you become an experienced and demanded specialist.</h5>
                         </div>
                         <div class="offset-top-20 offset-xl-top-40 not-animated" data-caption-animate="fadeInUp" data-caption-delay="400" data-caption-duration="1700">
-                          <div class="inset-xs-left-30 reveal-lg-inline-block"><a class="btn btn-ellipse btn-primary veil reveal-lg-inline-block" href="https://livedemo00.template-help.com/wt_prod-14585/academics.html">Lire plus</a></div>
+                          <div class="inset-xs-left-30 reveal-lg-inline-block"><a class="btn btn-ellipse btn-primary veil reveal-lg-inline-block" href="/actualité">Lire plus</a></div>
                         </div>
                       </div>
                     </div>
@@ -182,7 +184,7 @@ $reponse->closeCursor(); // Termine le traitement de la requête
                           <h5 class="text-regular font-default">Take part in numerous amazing activities that will develop you as a person and help you make new friends that will undoubtedly become a part of your student life.</h5>
                         </div>
                         <div class="offset-top-20 offset-xl-top-40 not-animated" data-caption-animate="fadeInUp" data-caption-delay="400" data-caption-duration="1700">
-                          <div class="inset-xs-left-30 reveal-lg-inline-block"><a class="btn btn-ellipse btn-primary veil reveal-lg-inline-block" href="https://livedemo00.template-help.com/wt_prod-14585/academics.html">Lire plus</a></div>
+                          <div class="inset-xs-left-30 reveal-lg-inline-block"><a class="btn btn-ellipse btn-primary veil reveal-lg-inline-block" href="/Acceuil/Presentation">Lire plus</a></div>
                         </div>
                       </div>
                     </div>

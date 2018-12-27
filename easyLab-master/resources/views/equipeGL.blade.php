@@ -17,7 +17,7 @@
                 die('Erreur : ' . $e->getMessage());
         } 
         
-        $req=" SELECT * from equipes where achronymes='$equipe'" ;
+        $req=" SELECT * from equipes where id='$equipe'" ;
 $reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
 $reponse->execute();
         $row=$reponse->fetch();
@@ -115,35 +115,14 @@ $reponse->execute();
                 <div class="rd-search-results"></div>
               </div>
                      <h3 class="text-bold veil reveal-lg-block">Descriiption</h3>
-                      <p>Dans les nouveaux contextes de traitement de l’information les données numériques sont devenues souvent:</p>
-                      <p>
-                        <ul>
-                        <li>hétérogènes</li>
-                        <li>non ou partiellement structurées</li>
-                        <li>volumineuses</li>
-                        <li>distribuées/réparties</li>
-                        <li>créées en flux continue et rapide</li>
-                      </ul>
-                      </p>
-                      <p>Il est devenu impératif de disposer de nouveaux modèles de:</p>
-                      <p>
-                        <ul>
-                        <li>représentation</li>
-                        <li>transformation</li>
-                        <li>recherche</li>
-                        <li>recommandation</li>
-                        <li>échange</li>
-                       <li>sécurité</li> 
-                       <li>visualisation</li>
-                       <li>interprétation des données</li>
-                     </ul>qui soient appropriés à ces spécificités.
-                      </p>
+                      <p><?php echo $row['resume']  ?></p>
+                     
                       <br>
                       <br>
                      
                      <div align="center" class="col-sm-3 col-lg-1-1"> 
                       <div class="team-member"> <?php  
-                      $req="SELECT name,prenom,grade,photo FROM equipes,users where equipes.chef_id=users.id and equipes.achronymes='$equipe'" ;
+                      $req="SELECT users.id as user_id,name,prenom,grade,photo FROM equipes,users where equipes.chef_id=users.id and equipes.id='$equipe'" ;
 $reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
 $reponse->execute();
         $row=$reponse->fetch();
@@ -155,12 +134,12 @@ $reponse->execute();
                 <div class="team-member-body">
                   <div>
                     
-                    <h4 class="text-bold team-member-title"><a href="/Acceuil/Equipe/GL/Membre">
+                    <h4 class="text-bold team-member-title"><a href="/membre/<?php echo $row['user_id'];  ?>">
                       <?php echo $row['name'];
                       echo ' '.$row['prenom'];
                         ?></a></h4>
                   </div>
-                  <p class="offset-top-0"><?php echo $row['grade'];?></p><a class="btn btn-primary" href="/Acceuil/Equipe/GL/Membre">Profile</a>
+                  <p class="offset-top-0"><?php echo $row['grade'];?></p><a class="btn btn-primary" href="/membre/<?php echo $row['user_id'];  ?>">Profile</a>
                 </div>
               </div><br><h3 class="text-bold veil reveal-lg-block"><a href="/Acceuil/Equipe/GL/Membre">Chef De L'Equipe</a></h3></div>
                     </div>
@@ -173,11 +152,7 @@ $reponse->execute();
                   <div class="inset-lg-left-60">
                     <h2 class="text-bold veil reveal-lg-block">Membres</h2>
                     <div class="hr divider bg-madison hr-sm-left-0 veil reveal-lg-block"></div>
-                    <div class="offset-lg-top-60">
-                      <p>At Modern, we view college as a time for students to explore, exercise curiosity, and discover new interests and abilities.</p>
-                      <p>We provide students with an immersive, collaborative, and inspiring environment where they can develop a broadly informed, highly disciplined intellect that will help them be successful in whatever work they finally choose.</p>
-                      <p>Our students graduate with the values and knowledge they need to pursue meaningful work, find passion in life-long learning, and lead successful and purposeful lives.</p>
-                    </div>
+                  
                     <div class="offset-top-30"> <!-- Images-->
         <section class="section-bottom-70 section-lg-bottom-0">
           <h6 class="text-bold">Listes des Membres de l'equipe</h6>
@@ -187,10 +162,9 @@ $reponse->execute();
             
             <div class="row row-lg-condensed">
               <!--Membre1--><?php  
-                      $req="SELECT users.id,name,prenom,grade,photo FROM equipes,users where equipes.id=users.equipe_id and equipes.achronymes='$equipe'" ;
+                      $req="SELECT users.id,name,prenom,grade,photo FROM equipes,users where equipes.id=users.equipe_id and equipes.id='$equipe'" ;
 $reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
 $reponse->execute();
-        $row=$reponse->fetch();
         while ($donnees = $reponse->fetch()) // On affiche chaque entrée une à une
 {
 ?>
@@ -226,21 +200,24 @@ $reponse->closeCursor(); // Termine le traitement de la requête
                   <div class="inset-lg-left-60">
                     <h2 class="text-bold veil reveal-lg-block">Projets</h2>
                     <div class="hr divider bg-madison hr-sm-left-0 veil reveal-lg-block"></div>
-                    <div class="offset-lg-top-60">
-                      <p>Modern University offers advanced degrees through its Graduate School of Arts & Sciences and 12 professional schools. Browse the organizations below for information on programs of study, academic requirements, and faculty research.</p>
-                    </div>
+                    
                     <div class="offset-top-30"><img class="img-responsive reveal-inline-block" src="{{asset('labo/front_office/images/academics-02-770x480.jpg')}}" width="770" height="480" alt=""></div>
                     <div class="offset-top-30">
                       <h6 class="text-bold">Listes des Projets Realiser par l'equipe</h6>
                       <div class="text-subline"></div>
                       <div class="offset-top-20">
                         <ul class="list list-unstyled list-marked">
-                           <li><a href="/Acceuil/Equipe/GL/Projet">Projet1</a></li>
-                            <li><a href="/Acceuil/Equipe/GL/Projet">Projet1</a></li>
-                            <li><a href="/Acceuil/Equipe/GL/Projet">Projet1</a></li>
-                            <li><a href="/Acceuil/Equipe/GL/Projet">Projet1</a></li>
-                            <li><a href="/Acceuil/Equipe/GL/Projet">Projet1</a></li>
-                            <li><a href="/Acceuil/Equipe/GL/Projet">Projet1</a></li>
+                          <?php  
+                      $req="SELECT projet_id,projets.intitule as nom FROM equipes,users,projet_user,projets where equipes.id=users.equipe_id and equipes.id='$equipe' and projet_user.user_id=users.id and projets.id=projet_user.projet_id" ;
+$reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
+$reponse->execute();
+        $row=$reponse->fetch();
+        while ($projet = $reponse->fetch()) // On affiche chaque entrée une à une
+{
+?>
+                           <li><a href="/projets/<?php echo $projet['projet_id'];  ?>/details"><?php echo $projet['nom'];  ?></a></li>
+<?php } ?>
+                           
                         </ul>
                       </div>
                     </div>
@@ -256,108 +233,82 @@ $reponse->closeCursor(); // Termine le traitement de la requête
         <section class="section-70 section-md-20 bg-catskilll">
 
 
-                  <div class="post-news-modern">
+
+
+
+
+
+<?php 
+      
+    $req="SELECT * FROM articles,article_user,equipes,users 
+    where  equipes.id='$equipe' 
+      and articles.id=article_user.article_id 
+      and users.id=article_user.user_id
+      and equipes.id=users.equipe_id
+    group by articles.id" ;
+    $reponse = $bdd->prepare($req); // On récupère tout le contenu de la table 
+    $reponse->execute();
+    while ($articles = $reponse->fetch()) // On affiche chaque entrée une à une
+{ 
+?>
+                  <div class="post-news-modern" style=" border: 2px gray solid ">
                     <div class="unit unit-sm unit-sm-horizontal unit-timeline unit-sm-inverse">
                       <div class="unit-body">
-                        <article class="post-news post-news-wide"><a href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html"><img class="img-responsive" src="{{asset('labo/front_office/Modern News_files/news-01-770x500.jpg')}}" width="770" height="500" alt=""></a>
+                        <article class="post-news post-news-wide">
                           <div class="post-news-body">
-                            <h4 class="text-bold text-primary"><a href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html">Social Recommender Approach for Technology Enhanced Learning</a></h4>
-                            <p><h6>Type : Publication(Revue)</h6>
+                            <h4 class="text-bold text-primary"><a href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html"><?php echo $articles['titre'];  ?></a></h4>
+                            <p><h6>Type : <?php echo $articles['titre'];  ?></h6>
                               <br>
-                            Social Recommender Approach for Technology Enhanced Learning, International Journal of Learning Technlogy, In Press, Inderscience.</p>
+                            <?php echo $articles['resume'];  ?></p>
+                            <br>
+                          <p>  <h6>Membre Interne :</h6>
+                                    <?php 
+     $artc_id=$articles['article_id'];
+    $req1="
+    SELECT name,prenom 
+    FROM users,article_user 
+    where users.id=user_id 
+      and article_id='$artc_id'
+       " ;
+    $reponse1 = $bdd->prepare($req1); // On récupère tout le contenu de la table 
+    $reponse1->execute();
+    while ($particpant = $reponse1->fetch()) // On affiche chaque entrée une à une
+
+{ 
+?>  <?php if($particpant['name']!=null)echo "<p>".$particpant['name']." ".$particpant['prenom']."</p>";  ?>
+<?php } ?>
+                            </p>
+                           
+                             <?php 
+                             if($articles['membres_ext']!=null)
+                              echo " <p>  <h6>Membre Externe :</h6>".$articles['membres_ext']; 
+                               ?>
+
+                            </p>
                             <div class="post-news-meta offset-top-30">
-                              <div class="tags-list group group-sm reveal-inline-block text-middle"><a class="btn btn-xs btn-primary text-italic" href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html">paris</a><a class="btn btn-xs btn-primary text-italic" href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html">Françe</a><a class="btn btn-xs btn-primary text-italic" href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html">International Journal of Learning Technlogy</a></div>
+                              <div class="tags-list group group-sm reveal-inline-block text-middle">
+                                 <?php if($articles['lieu_ville']!=null)echo" <a class='btn btn-xs btn-primary text-italic' href='#'>
+                                   ".$articles['lieu_ville']. "</a>";  ?>
+                                   <?php if($articles['lieu_pays']!=null)echo" <a class='btn btn-xs btn-primary text-italic' href='#'>
+                                   ".$articles['lieu_pays'] ."</a>";  ?>
+                                   <?php if($articles['journal']!=null)echo" <a class='btn btn-xs btn-primary text-italic' href='#'>
+                                   ".$articles['journal']." </a>";  ?>
+                                   <?php if($articles['conference']!=null)echo" <a class='btn btn-xs btn-primary text-italic' href='#'>
+                                   ".$articles['conference']." </a>";  ?>
+
+                              </div>
                             </div>
                           </div>
                         </article>
                       </div>
-                      <div class="unit-right text-center">
-                        <div class="unit unit-horizontal unit-middle unit-spacing-xxs unit-sm unit-sm-vertical unit-sm-inverse">
-                          <div class="unit-left"><img class="img-responsive img-circle reveal-inline-block" src="{{asset('labo/front_office/Modern News_files/user-maria-freeman-90x90.jpg')}}" width="90" height="90" alt="">
-                            <p class="text-primary">Maria Freeman</p>
-                          </div>
-                          <div class="unit-body text-left text-sm-center">
-                            <time datetime="2018-01-01">June 13, 2018 <br> at 8:00 pm</time>
-                          </div>
-                        </div>
-                      </div>
+                
+                         
+                 
+                      
                     </div>
                   </div>
-                  <div class="post-news-modern">
-                    <div class="unit unit-sm unit-sm-horizontal unit-timeline unit-sm-inverse">
-                      <div class="unit-body">
-                        <article class="post-news post-news-wide"><a href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html"><img class="img-responsive" src="{{asset('labo/front_office/Modern News_files/news-06-770x500.jpg')}}" width="770" height="500" alt=""></a>
-                          <div class="post-news-body">
-                            <h4 class="text-bold text-primary"><a href="">Studying in the United States</a></h4>
-                            <p>International students increasingly want to come to the United States for college or graduate school. Use our tips, rankings, and more to help you find the best school for you. For more information about pursuing a master’s degree or Ph.D. in the U.S., see Studying at a U.S. Graduate School.</p>
-                            <div class="post-news-meta offset-top-30">
-                              <div class="tags-list group group-sm reveal-inline-block text-middle"><a class="btn btn-xs btn-primary text-italic" href="">News</a><a class="btn btn-xs btn-primary text-italic" href="">Colleges</a><a class="btn btn-xs btn-primary text-italic" href="">Liberal Arts</a></div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                      <div class="unit-right text-center">
-                        <div class="unit unit-horizontal unit-middle unit-spacing-xxs unit-sm unit-sm-vertical unit-sm-inverse">
-                          <div class="unit-left"><img class="img-responsive img-circle reveal-inline-block" src="{{asset('labo/front_office/Modern News_files/user-steven-alvarez-230x230.jpg')}}" width="90" height="90" alt="">
-                            <p class="text-primary">Eric Hansen</p>
-                          </div>
-                          <div class="unit-body text-left text-sm-center">
-                            <time datetime="2018-01-01">June 10, 2018 <br> at 8:00 pm</time>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="post-news-modern">
-                    <div class="unit unit-sm unit-sm-horizontal unit-timeline unit-sm-inverse">
-                      <div class="unit-body">
-                        <article class="post-news post-news-wide"><a href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html"><img class="img-responsive" src="{{asset('labo/front_office/Modern News_files/news-03-770x500.jpg')}}" width="770" height="500" alt=""></a>
-                          <div class="post-news-body">
-                            <h4 class="text-bold text-primary"><a href="">5 Ways to Pay for Community College</a></h4>
-                            <p>Most community college students qualify for need-based aid, experts say. Many community colleges offer promise programs, which offer tuition-free awards to eligible students – mainly to students with Pell grant eligibility. For one Massachusetts teen choosing between a two-year or four-year college, cost was the deciding factor.</p>
-                            <div class="post-news-meta offset-top-30">
-                              <div class="tags-list group group-sm reveal-inline-block text-middle"><a class="btn btn-xs btn-primary text-italic" href="">News</a><a class="btn btn-xs btn-primary text-italic" href="">Colleges</a><a class="btn btn-xs btn-primary text-italic" href="">Liberal Arts</a></div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                      <div class="unit-right text-center">
-                        <div class="unit unit-horizontal unit-middle unit-spacing-xxs unit-sm unit-sm-vertical unit-sm-inverse">
-                          <div class="unit-left"><img class="img-responsive img-circle reveal-inline-block" src="{{asset('labo/front_office/Modern News_files/user-maria-freeman-90x90.jpg')}}" width="90" height="90" alt="">
-                            <p class="text-primary">Maria Freeman</p>
-                          </div>
-                          <div class="unit-body text-left text-sm-center">
-                            <time datetime="2018-01-01">June 9, 2018 <br> at 8:00 pm</time>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="post-news-modern">
-                    <div class="unit unit-sm unit-sm-horizontal unit-timeline unit-sm-inverse">
-                      <div class="unit-body">
-                        <article class="post-news post-news-wide"><a href="https://livedemo00.template-help.com/wt_prod-14585/news-post-page.html"><img class="img-responsive" src="{{asset('labo/front_office/Modern News_files/news-05-770x500.jpg')}}" width="770" height="500" alt=""></a>
-                          <div class="post-news-body">
-                            <h4 class="text-bold text-primary"><a href="">Consider MBA Programs That Offer Summer Prep</a></h4>
-                            <p>New MBA students can brush up on finance and accounting before classes begin. Summer preparatory programs offered through schools allow students to get a head start on making connections and building skills. Summer is usually the season for vacations and short-term internships, but many new MBA students spend a substantial part of it in class.</p>
-                            <div class="post-news-meta offset-top-30">
-                              <div class="tags-list group group-sm reveal-inline-block text-middle"><a class="btn btn-xs btn-primary text-italic" href="">News</a><a class="btn btn-xs btn-primary text-italic" href="">Colleges</a><a class="btn btn-xs btn-primary text-italic" href="">Liberal Arts</a></div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                      <div class="unit-right text-center">
-                        <div class="unit unit-horizontal unit-middle unit-spacing-xxs unit-sm unit-sm-vertical unit-sm-inverse">
-                          <div class="unit-left"><img class="img-responsive img-circle reveal-inline-block" src="{{asset('labo/front_office/Modern News_files/user-steven-alvarez-230x230.jpg')}}" width="90" height="90" alt="">
-                            <p class="text-primary">Eric Hansen</p>
-                          </div>
-                          <div class="unit-body text-left text-sm-center">
-                            <time datetime="2018-01-01">June 8, 2018 <br> at 8:00 pm</time>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <?php } ?>
+                  
                
         </section>
                     </div>

@@ -47,6 +47,19 @@ Route::get('dashboard','dashController@index');
 Route::get('parametre','ParametreController@create');
 Route::post('parametre','ParametreController@store');
 
+Route::post('actualite/{id}','ActualitesController@store');
+
+Route::get('materiel','MaterielController@index');
+Route::get('materiel/create','MaterielController@create');
+Route::post('materiel2','MaterielController@Catstore');
+Route::post('materiel','MaterielController@store');
+Route::put('materiel/{Mid}/{Aid}/{Affectation}','MaterielController@update');
+Route::put('materiel/{Mid}/AffectationEquipe','MaterielController@storeAffectationEquipe');
+Route::put('materiel/{Mid}/AffectationUser','MaterielController@storeAffectationUser');
+Route::delete('materiel/{id}','MaterielController@destroy');
+Route::get('materiel/{id}/details','MaterielController@details');
+
+
 Route::get('theses','TheseController@index');
 Route::get('theses/create','TheseController@create');
 Route::post('theses','TheseController@store')->middleware('thesecond');
@@ -67,7 +80,7 @@ Route::get('membres','UserController@index');
 Route::get('membres/create','UserController@create');
 Route::post('membres','UserController@store');
 Route::get('membres/{id}/details','UserController@details');
-Route::get('/membre/{id}','UserController@ShowDetails');
+
 Route::get('trombinoscope','UserController@trombi');
 Route::get('membres/{id}/edit','UserController@edit');
 Route::put('membres/{id}','UserController@update');
@@ -83,7 +96,7 @@ Route::get('equipes/{id}/details','EquipeController@details');
 Route::put('equipes/{id}','EquipeController@update');
 Route::delete('equipes/{id}','EquipeController@destroy');
 
-Route::get('/Acceuil/Equipe/{achronymes}','EquipeController@ShowDetails');
+
 Route::get('/presentation', function () {
     return view('presentation');
 });
@@ -98,6 +111,15 @@ Route::delete('projets/{id}','ProjetController@destroy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::get('/Acceuil/Equipe/{achronymes}','FrontOfficeController@ShowEquipeDetails');
+Route::get('/membre/{id}','FrontOfficeController@ShowUserDetails');
+Route::get('/projets/{id}/details','FrontOfficeController@ShowProjetDetails');
+Route::get('/actualité','FrontOfficeController@ShowActualiteDetails');
+
+
 
 Route::get('/statistics',function(){
 

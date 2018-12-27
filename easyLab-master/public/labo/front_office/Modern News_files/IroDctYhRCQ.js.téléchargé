@@ -1,0 +1,3 @@
+if (self.CavalryLogger) { CavalryLogger.start_js(["xV4Ft"]); }
+
+__d("killswitch",["KSConfig"],(function(a,b,c,d,e,f){"use strict";function a(a){return b("KSConfig").killed.has(a)}a.override=function(a,c){c?b("KSConfig").killed.add(a):b("KSConfig").killed["delete"](a)};e.exports=a}),null);

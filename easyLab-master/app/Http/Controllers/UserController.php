@@ -11,6 +11,7 @@ use App\Parametre;
 use App\User;
 use App\Equipe;
 use App\Role;
+use App\Actualites;
 use Auth;
 
 
@@ -41,6 +42,7 @@ class UserController extends Controller
     public function details($id)
     {
         $membre = User::find($id);
+        $actualite = Actualites::where('user_id',$id)->get();
         $equipes = Equipe::all();
         $roles = Role::all();
         $labo = Parametre::find('1');
@@ -51,14 +53,11 @@ class UserController extends Controller
             'equipes' => $equipes,
             'roles' => $roles,
             'labo'=>$labo,
+            'actualite' =>$actualite,
             
         ]);;
     } 
-    public function ShowDetails($id)
-    {
-        
-       return view('Profile Membre',['user'=>$id]);
-    } 
+   
 
     public function create()
     {

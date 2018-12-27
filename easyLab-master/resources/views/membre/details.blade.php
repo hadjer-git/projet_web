@@ -108,6 +108,8 @@
               <li><a href="#activity1" data-toggle="tab">Modifier</a></li>
               @endif
               <li><a href="#timeline" data-toggle="tab">Articles</a></li>
+                @if(Auth::id() == $membre->id)
+              <li><a href="#timeline1" data-toggle="tab">Actualites</a></li>@endif
             </ul>
 
             <div class="tab-content">
@@ -197,7 +199,7 @@
                 <a href="{{url('articles/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"> Nouvel article</i></a>
               </div>
                    
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Type</th>
@@ -257,6 +259,9 @@
               </table>
             </div>
               </div>
+
+
+
 
 
 
@@ -478,6 +483,130 @@
             </form>
           </div>
 
+ <div class="tab-pane" id="timeline1">
+                 <div class="box-body" style="padding-top: 30px;">
+
+
+
+
+
+<div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Actualité
+                <small>new</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+             
+               <form class="well form-horizontal" method="POST" action="{{url('actualite/'.$membre->id)}}" id="contact_form" enctype="multipart/form-data">
+              {{ csrf_field() }}
+              <fieldset>
+
+                <!-- Form Name -->
+                <legend><center><h2><b>Nouvel Actualité</b></h2></center></legend><br>
+
+                
+
+                    
+                              
+
+                      <div class="form-group">
+                        <label class="col-md-1 control-label">Titre:</label>  
+                        <div class="col-md-9 inputGroupContainer ">
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input  name="titre" placeholder="Prénom" class="form-control"  type="text" value="Titre ..."> 
+                              
+                          </div>
+                            <span class="help-block">
+                              
+                            </span>
+
+                            <div class="col-md-8 inputGroupContainer">
+                              <input name="img" type="file" >
+                             </div>
+                             <p>   <textarea id="editor1" name="contenu" rows="10" cols="80"  >
+                    </textarea></p>
+                        </div>
+                      </div>
+
+
+
+                       
+
+              </fieldset>
+
+              <div style="padding-top: 30px; margin-left: 35%;">
+              
+               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Publier</button> 
+                  </div>
+            </form>
+            </div>
+          </div>
+
+ <div class="tab-pane" id="timeline">
+                 <div class="box-body" style="padding-top: 30px;">
+                   <!-- /.row --><table id="example1" class="table table-bordered table-striped">
+                     <thead>
+                <tr>
+                  <th>Actualité</th>
+                </tr>
+                </thead>
+                    <tbody>
+@foreach($actualite as $actualite)
+          <!-- Actuailité --><tr><td>
+          <div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="user-block">
+                <img class="img-circle" src="{{asset($membre->photo)}}" alt="User Image">
+                <span class="username"><a href="#">{{$membre->name}} {{$membre->prenom}}</a></span>
+                
+                <span class="description">publier le:{{$actualite->created_at}}</span>
+              </div>
+              <!-- /.user-block -->
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
+                  <i class="fa fa-circle-o"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+               <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <h3>{{$actualite->titre}}</h3>
+              <img class="img-responsive pad" src="{{asset($actualite->photo)}}" alt="Photo">
+
+              <p>{{$actualite->contenu}}</p>
+              
+            </div>
+            <!-- /.box-body -->
+           
+        <!-- /.Actuailité -->
+        
+          <!-- /.box -->
+
+            </div></td></tr>@endforeach</tbody> <tfoot>
+                <tr>
+                 <th>Affecter à</th>
+               
+                
+                </tr>
+                </tfoot></table></div></div>
+
+              </div>
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

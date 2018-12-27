@@ -64,7 +64,12 @@
         </li>
 
         @if(Auth::user()->role->nom == 'admin' )
-
+ <li>
+          <a href="{{url('materiel')}}">
+            <i class="fa fa-suitcase"></i> 
+            <span>matériel</span></a>
+          </li>
+          
           <li>
           <a href="{{url('parametre')}}">
             <i class="fa fa-gears"></i> 

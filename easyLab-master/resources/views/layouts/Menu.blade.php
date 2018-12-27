@@ -56,6 +56,8 @@
                     <ul class="rd-navbar-nav">
                      <li ><a href="/">Accueil</a>
                       </li>
+                      <li ><a href="/actualité">Actualité</a>
+                      </li>
                       <li><a href="/Acceuil/Presentation">Presentation</a>
                       </li>
                       <li class="rd-navbar--has-dropdown rd-navbar-submenu" class="active"><a>Equipes</a>
@@ -75,7 +77,7 @@ while ($donnees = $reponse->fetch()) // On affiche chaque entrée une à une
 {
 ?>
 
-                          <li><a href="/Acceuil/Equipe/<?php echo $donnees['achronymes']; ?>"><?php echo $donnees['achronymes']; ?></a>
+                          <li><a href="/Acceuil/Equipe/<?php echo $donnees['id']; ?>"><?php echo $donnees['achronymes']; ?></a>
                           </li>
                           <?php
 }

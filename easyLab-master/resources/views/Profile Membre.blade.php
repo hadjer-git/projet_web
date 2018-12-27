@@ -321,10 +321,16 @@
                             <p ><?php echo $articles['membres_ext'];  ?></p>
                             <?php 
      $artc_id=$articles['article_id'];
-    $req1="SELECT name,prenom FROM users,article_user where users.id=user_id and article_id='$artc_id' and users.id<>'$user'" ;
+    $req1="
+    SELECT name,prenom 
+    FROM users,article_user 
+    where users.id=user_id 
+      and article_id='$artc_id'
+       and users.id<>'$user'" ;
     $reponse1 = $bdd->prepare($req1); // On récupère tout le contenu de la table 
     $reponse1->execute();
     while ($particpant = $reponse1->fetch()) // On affiche chaque entrée une à une
+
 { 
 ?> <p ><?php echo $particpant['name']; ?></p>
 <?php } ?>
@@ -347,7 +353,7 @@
         <!-- Classic Skills Bars-->
         <section class="section-70 section-md-114 bg-madison context-dark">
           <div class="shell">
-            <h2 class="text-bold">bars de progresion</h2>
+            <h2 class="text-bold"> bars de progresion</h2>
             <hr class="divider bg-madison">
             <div class="range range-xs-center offset-top-65">
               <div class="cell-xs-10 cell-sm-6">
