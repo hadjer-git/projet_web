@@ -1,3 +1,0 @@
-if (self.CavalryLogger) { CavalryLogger.start_js(["8wNfb"]); }
-
-__d("VisualCompletionGating",["requireCond","cr:729414"],(function(a,b,c,d,e,f){"use strict";c=(a=b("cr:729414"))==null?void 0:a.v;e.exports=c}),null);
